@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aucun des trois</title>
+    <link rel="icon" href="./img/transfermarkt_gmbh__co_kg_logo.jpg">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <h1 style='text-align: center;'>Aucun des trois</h1>
+    <center>
+        <p style='font-size: 20pt'>Aucun des trois est crushé par 4 gardiens de Bundesliga sur 20, ce qui représente 20%.</p>
+        <br><img src='./img/ensembre vide.png' width='500px'> <br><br>
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+        <div></div>
+        <br><br>
+        <h2 style='text-decoration: underline'>Tableau représentant les gardiens de but de bundesliga qui crushent sur Aucun des trois</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>rang</th>
+                    <th>nom/prénom</th>
+                    <th>photo</th>
+                    <th>leur crush</th>
+                    <th>photo de leur crush</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style='font-size: 70pt; text-align: center;' class="number">1</td>
+                    <td style='font-size: 30pt; text-align: center;' class="name">Koen Casteels</td>
+                    <td class="image"><center><img src='./img/121588.png' width=400px></center></td>
+                    <td style='font-size: 30pt; text-align: center;' class="crush">Real Gloves</td>
+                    <td><img src="./img/real-tec-logo.png" alt="real gloves" width="200px"></td>
+                </tr>
+                <tr>
+                    <td style='font-size: 70pt; text-align: center;' class="number">2</td>
+                    <td style='font-size: 30pt; text-align: center;' class="name">Lukas Hradecky</td>
+                    <td class="image"><center><img src='./img/Lukas Hradecky.png' width=200px></center></td>
+                    <td style='font-size: 30pt; text-align: center;' class="crush">Uhlsport</td>
+                    <td><img src="./img/Uhlsport.png" alt="Uhlsport" width="200px"></td>
+                </tr>
+                <tr>
+                    <td style='font-size: 70pt; text-align: center;' class="number">3</td>
+                    <td style='font-size: 30pt; text-align: center;' class="name">Marcel Schuhen</td>
+                    <td class="image"><center><img src='./img/Marcel Schuhen.png' width=200px></center></td>
+                    <td style='font-size: 30pt; text-align: center;' class="crush">Uhlsport</td>
+                    <td><img src="./img/Uhlsport.png" alt="Uhlsport" width="200px"></td>
+                </tr>
+                <tr>
+                    <td style='font-size: 70pt; text-align: center;' class="number">4</td>
+                    <td style='font-size: 30pt; text-align: center;' class="name">Moritz Nicolas</td>
+                    <td class="image"><center><img src='./img/Moritz Nicolas.png' width=200px></center></td>
+                    <td style='font-size: 30pt; text-align: center;' class="crush">Uhlsport</td>
+                    <td><img src="./img/Uhlsport.png" alt="Uhlsport" width="200px"></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <button onclick="closeWindow()">fermer</button>
+    </center>
+</body>
+</html>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px; /* Ajoutez ou ajustez la valeur de remplissage selon vos besoins */
+}
+/*th {
+    width: 200px;
+}*/
+.number {
+    width: 100px;
+}
+.name {
+    width: 350px;
+}
+.image {
+    width: 470px;
+}
+.crush {
+    width: 300px;
+}
+button {
+    width: 500px;
+    height: 70px;
+    font-size: 20pt;
+    cursor: pointer;
+    background-color: blue;
+    border: none;
+    color: white;
+    border-radius: 20px;
+}
+button:hover {
+    background-color: skyblue;
+    color: black;
+}
+</style>
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Crushs', 'number of goalkeepers'], 
+        ['Real Gloves',  1],
+        ['Uhlsport',  3],
+    ]);
+
+    var options = {
+        title: 'Ce diagramme représente le pourcentage de gardiens de but de la Bundesliga qui ne sont pas hétérosexuel ni homosexuel ni zoophile:',
+        colors: ['#FFFF00', '#FF0000'], // Adjust the number of colors to match the number of data points
+        pieSliceTextStyle: {
+            color: 'black', // Set the text color to black
+        },
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart')); // Move this line after defining options
+
+    chart.draw(data, options);
+}
+
+function closeWindow() {
+    var newWindow = window.open('', '_self');
+    newWindow.close();
+}
+</script>

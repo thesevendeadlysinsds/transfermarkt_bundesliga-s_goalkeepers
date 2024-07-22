@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfermarkt</title>
+    <link rel="icon" href="./img/transfermarkt_gmbh__co_kg_logo.jpg">
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+    <center>
+        <h1>Bienvenue sur transfermarkt</h1>
+        <p id="debut1">Êtes-vous prêt(e) à faire le petit QCM à une seule réponse possible sur chaque question ? C'est à propos des gardiens de but de la Bundesliga.</p>
+        <p id="debut1">Pour répondre aux QCM, cliquez sur suivant ou (k) sur clavier</p>
+        <div class="quiz-container" id="quizContainer">
+            <div id="image"></div><br>
+            <div id="guide"></div><br>
+            <div id="question"></div><br>
+            <div id="options" class="options"></div><br>
+            <div id="result"></div><wbr><div id="explanation"></div><br>
+            <button id="nextBtn" height="50px">Suivant</button>
+        </div> 
+        <button id="startButton" onclick="showquizContainer()">Faire le QCM</button>
+        <div id="resultfinal"></div>
+
+    </center>
+
+    <script>
+        const images = [
+            "./img/3672948-74767895-1600-900.jpg",
+            "./img/dfl-obj-0002hc-dfl-clu-00000d-dfl-sea-0001k7.png",
+            "./img/dfl-obj-j013ro-dfl-clu-000004-dfl-sea-0001k7.png",
+            "./img/121588.png",
+            "./img/trimmed-396a3d2998c55faec5d295232d76ed7f.png",
+            "./img/dfl-obj-0002he-dfl-clu-000008-dfl-sea-0001k7.png",
+            "./img/dfl-obj-002g6c-dfl-clu-00000a-dfl-sea-0001k7.png",
+            "./img/frederik-ronnow-union-berlin-2022-1667653203-95759.png",
+            "./img/1238232150.png",
+            "./img/robin-zentner-bei-mainz-05-2022-1647701164-82313.png",
+            "./img/dfl-obj-0028co-dfl-clu-000010-dfl-sea-0001k7.png",
+            "./img/matej kovar.png",
+            "./img/dfl-obj-00001e-dfl-clu-000002-dfl-sea-0001k7.png",
+            "./img/Janis Blaswich.png",
+            "./img/Daniel Peretz.png",
+            "./img/Péter Gulácsi.png",
+            "./img/Lukas Hradecky.png",
+            "./img/Jiri Pavlenka.png",
+            "./img/Marcel Schuhen.png",
+            "./img/Moritz Nicolas.png",
+        ];
+
+        const questions = [
+            {
+                question: 'Qui est le crush de Gregor Kobel ?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'puma',
+                explanations: {
+                'réponse1': "Gregor Kobel ne porte pas de vêtements pour séduire les jolies filles.",
+                'Carla Couderc': "Gregor Kobel n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Gregor Kobel porte des chaussures et des gants Puma.",
+                'Aucun des trois': "Gregor Kobel ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Alexander Nübel ?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'réponse1',
+                explanations: {
+                'réponse1': "Alexander Nübel porte des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Alexander Nübel n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Alexander Nübel ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Alexander Nübel ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Jonas Omlin ?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'puma',
+                explanations: {
+                'réponse1': "Jonas Omlin ne porte pas de vêtements pour séduire les jolies filles.",
+                'Carla Couderc': "Jonas Omlin n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Jonas Omlin porte des chaussures et des gants Puma.",
+                'Aucun des trois': "Jonas Omlin ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Koen Casteels?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Aucun des trois',
+                explanations: {
+                'réponse1': "Koen Casteels ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Koen Casteels n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Koen Casteels ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Koen Casteels montre de l'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Kevin Trapp?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'réponse1',
+                explanations: {
+                'réponse1': "Kevin Trapp porte des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Kevin Trapp n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Kevin Trapp ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Kevin Trapp ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Marvin Schwäbe?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'réponse1',
+                explanations: {
+                'réponse1': "marvin schwäbe porte des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "marvin schwäbe n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "marvin schwäbe ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "marvin schwäbe ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Noah Atubolu?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'puma',
+                explanations: {
+                'réponse1': "Noah Atubolu ne porte pas de vêtements pour séduire les jolies filles.",
+                'Carla Couderc': "Noah Atubolu n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Noah Atubolu porte des chaussures et des gants Puma.",
+                'Aucun des trois': "Noah Atubolu ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Frederik Rønnow?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'réponse1',
+                explanations: {
+                'réponse1': "Frederik Rønnow porte des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Frederik Rønnow n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Frederik Rønnow ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Frederik Rønnow ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Manuel Neuer?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'réponse1',
+                explanations: {
+                'réponse1': "Manuel Neuer porte des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Manuel Neuer n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Manuel Neuer ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Manuel Neuer ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Robin Zentner?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Carla Couderc',
+                explanations: {
+                'réponse1': "Robin Zentner ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Robin Zentner est homosexuel, donc il est amoureux de Carla Couderc.",
+                'puma': "Robin Zentner ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Robin Zentner ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Finn Dahmen?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Carla Couderc',
+                explanations: {
+                'réponse1': "Finn Dahmen ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Finn Dahmen est homosexuel, donc il est amoureux de Carla Couderc.",
+                'puma': "Finn Dahmen ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Finn Dahmen ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Matej Kovar?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'réponse1',
+                explanations: {
+                'réponse1': "Matej Kovar porte des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Matej Kovar n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Matej Kovar ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Matej Kovar ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Oliver Baumann?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Carla Couderc',
+                explanations: {
+                'réponse1': "Oliver Baumann ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Oliver Baumann est homosexuel, donc il est amoureux de Carla Couderc.",
+                'puma': "Oliver Baumann ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Oliver Baumann ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Janis Blaswich?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Carla Couderc',
+                explanations: {
+                'réponse1': " Janis Blaswich ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': " Janis Blaswich est homosexuel, donc il est amoureux de Carla Couderc.",
+                'puma': " Janis Blaswich ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': " Janis Blaswich ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Daniel Peretz?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'puma',
+                explanations: {
+                'réponse1': "puma ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "puma n'est pas homosexuel, donc il n'est pas amoureux de Carla Couderc.",
+                'puma': "puma porte des chaussures et des gants Puma.",
+                'Aucun des trois': "puma ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Péter Gulácsi?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'réponse1',
+                explanations: {
+                'réponse1': "Péter Gulácsi porte des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Péter Gulácsi n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Péter Gulácsi ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Péter Gulácsi ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Lukas Hradecky?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Aucun des trois',
+                explanations: {
+                'réponse1': "Lukas Hradecky ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Lukas Hradecky n'est pas homosexuel, donc il ne serait pas amoureux de Carla Couderc.",
+                'puma': "Lukas Hradecky ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Lukas Hradecky montre de l'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Jiri Pavlenka?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Carla Couderc',
+                explanations: {
+                'réponse1': " Jiri Pavlenka ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': " Jiri Pavlenka est homosexuel, donc il est amoureux de Carla Couderc.",
+                'puma': " Jiri Pavlenka ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': " Jiri Pavlenka ne montre pas d'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de Marcel Schuhen?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Aucun des trois',
+                explanations: {
+                'réponse1': "Marcel Schuhen ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': "Marcel Schuhen n'est pas homosexuel, donc il n'est pas amoureux de Carla Couderc.",
+                'puma': "Marcel Schuhen ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': "Marcel Schuhen a de l'intérêt envers aucun des trois.",
+                }
+            },
+            {
+                question: 'Qui est le crush de  Moritz Nicolas?',
+                options: ['réponse1', 'Carla Couderc', 'puma', 'Aucun des trois'],
+                answer: 'Aucun des trois',
+                explanations: {
+                'réponse1': " Moritz Nicolas ne porte pas des vêtements pour faire séduire les jolies filles.",
+                'Carla Couderc': " Moritz Nicolas n'est pas homosexuel, donc il n'est pas amoureux de Carla Couderc.",
+                'puma': " Moritz Nicolas ne porte pas des chaussures ni des gants Puma.",
+                'Aucun des trois': " Moritz Nicolas a de l'intérêt envers aucun des trois.",
+                }
+            },
+            // Ajoutez plus d'objets pour plus de questions  
+        ];
+        const questionElement = document.getElementById('question');
+const optionsElement = document.getElementById('options');
+const nextBtn = document.getElementById('nextBtn');
+const resultElement = document.getElementById('result');
+const imageElement = document.getElementById('image');
+
+let currentImageIndex = 0;
+let currentQuestion = 0;
+let score = 0;
+
+function showquizContainer() {
+        var quizContainer = document.getElementById("quizContainer");
+        quizContainer.style.display = "block"; // Afficher la div quiz-container
+
+        var startButton = document.getElementById("startButton");
+        startButton.style.display = "none"; // Masquer le bouton
+    }
+
+function showQuestion() {
+    const question = questions[currentQuestion];
+    questionElement.textContent = question.question;
+
+    optionsElement.innerHTML = '';
+    question.options.forEach((option, index) => {
+        const optionBtn = document.createElement('button');
+        optionBtn.id = 'proposition';
+        optionBtn.textContent = option;
+        optionBtn.classList.add('option');
+        optionsElement.appendChild(optionBtn);
+
+        optionBtn.addEventListener('click', () => checkAnswer(index));
+    });
+    const guide = document.getElementById("guide");
+    guide.innerHTML = '<div class="display-flex"><p>réponse 1 =<p color=\'white\'><img src="./img/IMG_20231006_133613_converted.png" alt="" width="200px"></div><br>\
+    <div class="display-flex"><p>puma = </p><img src="./img/puma.png" alt="" width="200"></div>';
+}
+
+function checkAnswer(selectedIndex) {
+    const question = questions[currentQuestion];
+    if (question.options[selectedIndex] === question.answer) {
+        score++;
+        resultElement.textContent = "Bonne réponse !";
+        resultElement.style.color = "green";
+        resultElement.style.fontSize = "20pt"; // Définir la taille de la police
+        // Afficher l'explication
+        showExplanation(question.explanation);
+    } else {
+        resultElement.textContent = "Mauvaise réponse😔.";
+        resultElement.style.color = "red";
+        resultElement.style.fontSize = "20pt"; // Définir la taille de la police
+    }
+
+     // Ajoutez cet appel pour afficher l'explication
+     showExplanation(question.options[selectedIndex], question.answer);
+    
+    nextBtn.disabled = false;
+    optionsElement.classList.add('disabled');
+    document.querySelectorAll('.option').forEach(optionBtn => optionBtn.disabled = true);
+}
+
+function showNextQuestion() {
+    // Increment the current question index
+    currentQuestion++;
+
+    // Check if there are more questions to display
+    if (currentQuestion < questions.length) {
+        // Display the next question
+        showQuestion();
+
+        // Reset result, enable options, and disable the "Next" button
+        resultElement.textContent = '';
+        optionsElement.classList.remove('disabled');
+        document.querySelectorAll('.option').forEach(optionBtn => optionBtn.disabled = false);
+        nextBtn.disabled = true;
+    } else {
+        // No more questions, show final score
+        questionElement.textContent = '';
+        optionsElement.innerHTML = '';
+        resultElement.textContent = `Votre score : ${score}/${questions.length} (${Math.round((score / questions.length) * 20)}/20) Votre note sera mise sur Pronote ce soir avant 20 heures et sera de coefficient 7.`;
+
+        // Check if the user scored full points (20)
+        if (score == 20) {
+            document.getElementById("quizContainer").style.display = "none"; 
+            document.getElementById("debut1").style.display = "none";
+            document.getElementById("resultfinal").innerHTML = "<center><p style='font-size: 20pt;'>Votre score : </p><p style='font-size: 20pt; color: green'>" + score + "/" + questions.length + " (" +
+            Math.round((score / questions.length) * 20) + "/20)</p> <p style='font-size: 20pt;'> Votre note sera mise sur Pronote ce soir avant 20 heures et sera de coefficient 7." + "<br><br>" + 
+            "Vous pouvez voir les statistiques des gardiens de bundesliga en cliquant sur le boutton ci-dessous:</p>" +
+            '<a href="statistiques.html" target=\'_blank\'><button style=\'width: 500px; height: 70px; font-size: 20pt; cursor: pointer; background-color: blue; border: none; color: white; border-radius: 20px; margin-top: -5px;\'><p style=\'font-size: 20pt;\'>voir les statistiques</p></button></a></center>';
+        } else {
+            document.getElementById("quizContainer").style.display = "none";
+            document.getElementById("debut1").style.display = "none";
+            document.getElementById("resultfinal").innerHTML = "<p style='font-size: 20pt;'>Vous n'avez pas obtenu tous les points. Veuillez réessayer.<br><br>" +
+            "Votre score : </p><p style='color: red; font-size: 20pt; white-space: nowrap;'>" + score + "/" + questions.length + ' (' + Math.round((score / questions.length) * 20) + "/20)</p><p style='font-size: 20pt;'>Votre note sera mise sur Pronote ce soir avant 20 heures et sera de coefficient 7.</p><br><br>" +
+            '<button onclick="refresh()" style="font-size: 20pt; height: 50px; width: 150px; background-color: white; cursor: pointer; border-radius: 20px; border: black 1px solid;" onmouseover="this.style.backgroundColor=\'skyblue\'" onmouseout="this.style.backgroundColor=\'white\'">réessayer</button>';
+        }
+    }
+}
+
+function refresh() {
+    location.reload();
+}
+
+function showImage() {
+    // Mettez à jour l'élément image avec le chemin du tableau images
+    imageElement.src = images[currentImageIndex];
+    imageElement.innerHTML = `<img src="${images[currentImageIndex]}" alt="Image" width="400">`;
+}
+
+function changeImage() {
+    // Incrémente l'index de l'image actuelle et affiche la nouvelle image
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    showImage();
+}
+
+// Appelez showImage() pour afficher la première image
+showImage();
+
+// Ajoutez un gestionnaire d'événements pour le changement d'image
+imageElement.addEventListener('click', changeImage);
+
+nextBtn.addEventListener('click', showNextQuestion);
+nextBtn.addEventListener('click', changeImage);
+
+showQuestion();
+
+function showExplanation(selectedOption, correctAnswer) {
+    console.log("Selected Option:", selectedOption);
+    console.log("Correct Answer:", correctAnswer);
+
+    var explanationElement = document.getElementById("explanation");
+
+    if (selectedOption === correctAnswer) {
+        console.log("Correct Answer Explanation:", questions[currentQuestion].explanations[correctAnswer]);
+        explanationElement.textContent = "Explication : " + questions[currentQuestion].explanations[correctAnswer];
+    } else {
+        // Vérifiez si l'explication personnalisée existe pour la réponse sélectionnée
+        const customExplanation = questions[currentQuestion].explanations[selectedOption];
+
+        console.log("Custom Explanation:", customExplanation);
+
+        if (customExplanation) {
+            explanationElement.textContent = "Explication : " + customExplanation;
+        } else {
+            explanationElement.textContent = "Explication : Aucune explication disponible.";
+        }
+    }
+
+    explanationElement.style.display = "block"; // Afficher l'explication
+    explanationElement.style.fontSize = "20pt"; // Définir la taille de la police
+}
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    if (key === 'Enter') {
+        showNextQuestion(); // Appeler la fonction pour afficher la question suivante
+        changeImage();
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    if (key === 'k') {
+        showquizContainer()
+    }
+});
+
+function checkAnswerByShortcut(shortcut) {
+    let selectedIndex;
+    switch (shortcut) {
+        case 'a':
+        case 'A':
+            selectedIndex = 0;
+            break;
+        case 'b':
+        case 'B':
+            selectedIndex = 1;
+            break;
+        case 'c':
+        case 'C':
+            selectedIndex = 2;
+            break;
+        case 'd':
+        case 'D':
+            selectedIndex = 3;
+            break;
+        default:
+            return; // Si aucune touche valide n'est pressée, ne rien faire
+    }
+    checkAnswer(selectedIndex);
+}
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    if (key === 'a' | key === 'A' || key === 'b' || key === 'B' || key === 'c' || key === 'C' || key === 'd' || key === 'D') {
+        checkAnswerByShortcut(key);
+    }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfermarkt - statistiques</title>
+    <link rel="icon" href="./img/transfermarkt_gmbh__co_kg_logo.jpg">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <center>
+    <h1 class="h1">Bienvenue sur transfermarkt</h1>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    <!--<div id="yuvgh"></div> <div id="yth"></div>-->
+    <a href="classement.html" target="_blank"><button class="classement1">Voir le classement des 20 premiers des gardiens de bundesliga</button></a>
+    <div class="yf" style='display: flex; justify-content: center; justify-content: space-evenly;'>
+        <div class="reponse1"><a href='reponse1.html' target='_blanck'><h2 class='h2'>réponse 1</h2><br><img src='./img/IMG_20231006_133613_converted.png' alt='La plus jolie fille du monde' style='height: 250px;'></a></div>
+        <div class="carlacouderc1"><a href='carlacouderc1.html' target='_blanck'><h2 class='h2'>Carla Couderc</h2><img src='./img/carla couderc1.png' alt='Carla Couderc' width='200px'></a></div>
+        <div class="puma1"><a href='puma.html' target='_blanck'><h2 class='h2'>puma</h2><img src='./img/puma.png' alt='puma' height='250px'></a></div>
+        <div class="ad3"><a href='adt.html' target='_blanck'><h2 class='h2'>Aucun des trois</h2><img src='./img/ensembre vide.png' alt='ensembre vide' height='250px'></a></div>
+    </div>
+    </center>
+</body>
+</html>
+<script>
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Crushs', 'number of goalkeepers'], 
+        ['réponse 1',  7],
+        ['Carla Couderc',  5],
+        ['puma',  4],
+        ['Aucun des trois', 4],
+    ]);
+
+    var options = {
+        title: 'Ce diagramme représente le pourcentage de gardiens de but de la Bundesliga ayant des crushs sur différentes personnes:',
+        colors: ['#FF0000', '#778899', '#00FF00', '#FFFF00'],
+        pieSliceTextStyle: {
+        color: 'black', // Set the text color to black
+        },
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    chart.draw(data, options);
+
+    function highlightSlice(sliceIndex, highlight) {
+    // Vous devez implémenter cette fonction pour gérer le survol du diagramme.
+    // Par exemple, vous pourriez changer le style du segment de diagramme en fonction de l'index.
+    // Assurez-vous de mettre à jour cette fonction en fonction de vos besoins spécifiques.
+    console.log("Slice index:", sliceIndex, "Highlight:", highlight);
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key.toLowerCase(); 
+    if (key === 'a') {
+        window.open('reponse1.html', '_blank'); 
+    }
+    if (key === 'b') {
+        window.open('carlacouderc1.html', '_blank'); 
+    }
+    if (key === 'c') {
+        window.open('puma.html', '_blank'); 
+    }
+    if (key === 'd') {
+        window.open('adt.html', '_blank'); 
+    }
+    if (key === 'k') {
+        window.open('classement.html', '_blank');
+    }
+});
+</script>
+<style>
+.h1 {
+    position: relative;
+    top: -25px;
+}
+.h2 {
+    color: black;
+    text-decoration: none;
+}
+.reponse1 {
+    border: 2px solid red; 
+    height: 350px;
+    cursor: pointer;
+}
+.reponse1:hover {
+    border: 5px solid red; 
+}
+.carlacouderc1 {
+    border: 2px solid #778899;
+    cursor: pointer;
+}
+.carlacouderc1:hover {
+    border: 5px solid #778899;
+}
+.puma1 {
+    border: 2px solid #00FF00; 
+    cursor: pointer;
+}
+.puma1:hover {
+    border: 5px solid #00FF00; 
+}
+.ad3 {
+    border: 2px solid #FFFF00; 
+    cursor: pointer;
+}
+.ad3:hover {
+    border: 5px solid #FFFF00;
+}
+.classement1 {
+    background-color: blue;
+    color: white;
+    position: relative;
+    top: -80px;
+    height: 50px;
+    width: 1000px;
+    border-radius: 20px;
+    border: black 1px solid;
+    cursor: pointer;
+    font-size: 20pt;
+}
+.classement1:hover {
+    background-color: skyblue;
+    color: black;
+}
+.yf {
+    position: relative;
+    top: -70px;
+}
+#piechart {
+    position: relative;
+    top: -50px;
+}
+body { 
+    height: 100%;
+}
+</style>

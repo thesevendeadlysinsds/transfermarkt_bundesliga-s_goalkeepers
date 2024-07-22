@@ -1,0 +1,76 @@
+h1 {
+    font-size: 40pt;
+}
+.h2 {
+    color: black;
+    text-decoration: none;
+}
+p {
+    font-size: 30px;
+}
+#nextBtn {
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: white;
+    border: 1px black solid;
+    cursor: pointer;
+}
+#nextBtn:hover {
+    background-color: skyblue;
+}
+#startButton {
+    width: 320px;
+    height: 70px;
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+    font-size: 20pt;
+    border: 1px black solid;
+    cursor: pointer;
+}
+#startButton:hover {
+    background-color: skyblue;
+    color: black;
+}
+#retour1 {
+    height: 50px;
+}
+#proposition {
+    width: 300px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: white;
+    border: 1px black solid;
+    cursor: pointer;
+}
+#proposition:hover {
+    background-color: skyblue;
+}
+#yth {
+    width: 1300px;
+}
+.display-flex {
+    margin-left: 40%;
+    display: flex;
+}
+.quiz-container {
+    display: none; /* Par défaut, masquer la div quiz-container */
+}
+.option {
+    height: 50px;
+}
+#piechart {
+    display: none;
+}
+#yuvgh {
+    display: none;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 10px; /* Ajoutez ou ajustez la valeur de remplissage selon vos besoins */
+}
+th {
+    width: 1200px;
+}
